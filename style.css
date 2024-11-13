@@ -1,0 +1,70 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+div { display: grid }
+
+.selection-container {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    margin: 50px auto;
+}
+
+.pie {
+    width: 100%;
+    aspect-ratio: 1; /* square */
+}
+
+.slice {
+    --hov: 0;
+    --angle: 1turn/var(--n); /* Angle of one slice */
+    --rot_angle: var(--i)*var(--angle) + var(--oa, 17deg); /* Slice rotation */
+    --dy: 50%*tan(.5*var(--angle)); /* Half a slice height */
+    grid-area: 1/ 1; /* Stack them all on top of each other */
+    place-content: center end; /* Text at 3 o'clock pre rotation */
+    padding: .5em; /* Space from circle edge to text */
+    border-radius: 50%; /* Turn square into disc */
+    transform: /* Need rotation before translation */
+        rotate(calc(var(--rot_angle))) 
+        /* Non-zero only in hover case */
+        translate(calc(var(--hov)*1em));
+    background: /* 90° = 3 o'clock; start half slice angle before */
+        conic-gradient(from calc(90deg - .5*var(--angle)), 
+            /* After one slice angle, full transparency */
+            var(--c) calc(var(--angle)), #0000 0%);
+    /* So hover is only triggered inside slice area */
+    clip-path: 
+        polygon(50% 50%, 
+            100% calc(50% - var(--dy)), 
+            100% calc(50% + var(--dy)));
+    /* filter: saturate(var(--hov)); */
+    transition: .3s;
+    counter-reset: i calc(var(--i) + 1);
+    
+    &::after {
+        /* Reverse parent rotation for upright text */
+        transform: rotate(calc(-1*(var(--rot_angle))));
+        content: counter(i);
+    }
+    
+    &:hover { --hov: 1 } /* Flip hover flag */
+}
+
+.description {
+    position: absolute;
+    border-radius: 3%;
+    padding: 1.5%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-size: 1.5em;
+    color: #ffffff;
+    background-color: #000000;
+    z-index: 1;
+}
+
+.description:empty {
+    display: none;
+}
