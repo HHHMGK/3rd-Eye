@@ -1,0 +1,9 @@
+transformers
+flask
+flask-cors
+pillow
+torch
+einops
+timm
+bitsandbytes
+accelerate>=0.26.0
