@@ -28,7 +28,7 @@
                     : "full";
 
                 // Dữ liệu gửi đi trong trường hợp POST
-                const requestData = { message: "Hello API" };
+                const requestData = { message: window.location.origin };
 
                 // Gửi yêu cầu đến API
                 const response = await fetch(url, {
