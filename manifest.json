@@ -7,6 +7,13 @@
       "default_popup": "main.html",
       "default_icon": "eye.png"
     },
+    "content_scripts" : [
+        {
+            "js" : ["init.js"],
+            "css": ["style.css"],
+            "matches" : ["<all_urls>"]
+        }
+    ],
     "permissions": [
       "activeTab"
     ]
