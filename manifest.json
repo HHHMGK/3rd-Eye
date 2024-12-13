@@ -4,7 +4,6 @@
     "description": "3rd Eye is a Chromium extension that helps individuals with visual impairment to have better web browsing experience",
     "version": "1.0",
     "action": {
-      "default_popup": "main.html",
       "default_icon": "eye.png"
     },
     "content_scripts" : [

@@ -28,8 +28,11 @@
                     : "full";
 
                 // Dữ liệu gửi đi trong trường hợp POST
-                const requestData = { message: window.location.origin };
-
+                const requestData = { 
+                    'article_url': window.location.href,
+                    'runtype': runtype
+                };
+                console.log("Request to send to API:", requestData);
                 // Gửi yêu cầu đến API
                 const response = await fetch(url, {
                     method: "POST", // Phương thức POST
@@ -43,14 +46,14 @@
                 if (response.ok) {
                     const data = await response.json(); // Parse JSON nếu cần
                     console.log("Response from API:", data);
-                    alert("API Response from " + url + ": " + JSON.stringify(data));
+                    // alert("API Response from " + url + ": " + JSON.stringify(data));
                 } else {
                     console.error("API request failed with status:", response.status);
-                    alert("API request failed. Check console for details.");
+                    // alert("API request failed. Check console for details.");
                 }
             } catch (error) {
                 console.error("Error while calling API:", error);
-                alert("Error while calling API. Check console for details.");
+                // alert("Error while calling API. Check console for details.");
             }
 
             // Tăng biến đếm sau mỗi lần click

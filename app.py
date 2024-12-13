@@ -50,8 +50,8 @@ tts_engine = pyttsx3.init()
 def process():
     data = request.json
     article_url = data.get('article_url', '')
-    runtype = data.get('runtype', 'summarize') # 'summarize' or 'full'
-    logger.info(f'Received URL: {article_url}') 
+    runtype = data.get('runtype', 'full') # 'summarize' or 'full'
+    logger.info(f'Received data: {data}')
     
     article_content = crawl_article(article_url, logger)
     if article_content is None:
@@ -128,9 +128,9 @@ def imgcap(img):
 
 def text2speech(text):
     if tts_engine.isBusy():
-        tts_engine.stop() 
+        tts_engine.stop()
     tts_engine.say(text)
-    tts_engine.runAndWait()   
+    tts_engine.runAndWait()
 
 if __name__ == '__main__':
     app.run(debug=False)
