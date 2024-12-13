@@ -4,16 +4,13 @@
     function createFloatingButton() {
         const button = document.createElement('button');
         button.className = 'floating-button';
-        button.onclick = function() {
-            alert('Button clicked!');
-        };
+        button.id = 'floating-mm-btn';
         document.body.appendChild(button);
     }
 
     function attachButtonEvent() {
         // Lấy nút vừa tạo bằng ID
         const btn = document.getElementById("floating-mm-btn");
-
         // Gắn sự kiện onclick
         btn.addEventListener("click", async function () {
             if (clickCount === 2) {
