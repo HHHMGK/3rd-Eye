@@ -7,3 +7,6 @@ einops
 timm
 bitsandbytes
 accelerate>=0.26.0
+beautifulsoup4
+scrapy
+pyttsx3 
