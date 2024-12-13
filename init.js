@@ -2,25 +2,12 @@
     let clickCount = 0; // Biến đếm số lần click
 
     function createFloatingButton() {
-        // Tạo nút bấm
-        const btn = document.createElement("button");
-        btn.id = "floating-mm-btn";
-        btn.textContent = "Search Mathemafia";
-
-        // Style cho nút bấm
-        btn.style.position = "fixed";
-        btn.style.bottom = "20px";
-        btn.style.right = "20px";
-        btn.style.padding = "10px 15px";
-        btn.style.backgroundColor = "#4CAF50"; // Màu nền xanh lá
-        btn.style.color = "white"; // Chữ màu trắng
-        btn.style.border = "none"; // Không có viền
-        btn.style.borderRadius = "5px"; // Góc bo tròn
-        btn.style.cursor = "pointer"; // Con trỏ chuột dạng pointer
-        btn.style.zIndex = "1000"; // Đảm bảo nút hiển thị trên các thành phần khác
-
-        // Thêm nút vào DOM
-        document.body.appendChild(btn);
+        const button = document.createElement('button');
+        button.className = 'floating-button';
+        button.onclick = function() {
+            alert('Button clicked!');
+        };
+        document.body.appendChild(button);
     }
 
     function attachButtonEvent() {
