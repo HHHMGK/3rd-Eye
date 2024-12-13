@@ -4,7 +4,7 @@
     function createFloatingButton() {
         const button = document.createElement('button');
         button.className = 'floating-button';
-        button.id = 'floating-mm-btn';
+        button.id = 'floating-mm-btn';// Thêm text vào nút để dễ nhận diện
         document.body.appendChild(button);
     }
 
@@ -19,47 +19,44 @@
                 clickCount = 0; // Đặt lại biến đếm
                 return; // Kết thúc hàm
             }
-            (async function() {
-                try {
-                    // Xác định cách gọi API dựa trên số lần click
-                    const url = "http://localhost:5000/process";
-                    const runtype = clickCount === 0 
-                        ? "summarize" 
-                        : "full";
-    
-                    // Dữ liệu gửi đi trong trường hợp POST
-                    const requestData = { 
-                        'article_url': window.location.href,
-                        'runtype': runtype
-                    };
-                    console.log("Request to send to API:", requestData);
-                    // Gửi yêu cầu đến API
-                    const response = await fetch(url, {
-                        method: "POST", // Phương thức POST
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify(requestData)
-                    });
-    
-                    // Kiểm tra kết quả
-                    if (response.ok) {
-                        const data = await response.json(); // Parse JSON nếu cần
-                        console.log("Response from API:", data);
-                        // alert("API Response from " + url + ": " + JSON.stringify(data));
-                    } else {
-                        console.error("API request failed with status:", response.status);
-                        // alert("API request failed. Check console for details.");
-                    }
-                } catch (error) {
-                    console.error("Error while calling API:", error);
-                    // alert("Error while calling API. Check console for details.");
+
+            // Xác định cách gọi API dựa trên số lần click
+            const url = "http://localhost:5000/process";
+            const runtype = clickCount === 0 
+                ? "summarize" 
+                : "full";
+
+            // Dữ liệu gửi đi trong trường hợp POST
+            const requestData = { 
+                'article_url': window.location.href,
+                'runtype': runtype
+            };
+            console.log("Request to send to API:", requestData);
+
+            // Gửi yêu cầu đến API mà không đợi phản hồi
+            fetch(url, {
+                method: "POST", // Phương thức POST
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(requestData)
+            }).then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    console.error("API request failed with status:", response.status);
                 }
-            })
-        
+            }).then(data => {
+                if (data) {
+                    console.log("Response from API:", data);
+                }
+            }).catch(error => {
+                console.error("Error while calling API:", error);
+            });
+
             // Tăng biến đếm sau mỗi lần click
             clickCount++;
-            console.log(clickCount)
+            console.log("Click count:", clickCount);
         });
     }
 
