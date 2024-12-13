@@ -26,12 +26,19 @@
             try {
                 // Xác định API dựa trên số lần click
                 const url = clickCount === 0 
-                    ? "http://localhost:5000" 
+                    ? "http://localhost:5000/process" 
                     : "http://localhost:5000/readall";
+
+                // Dữ liệu gửi đi trong trường hợp POST
+                const requestData = { message: "Hello API" };
 
                 // Gửi yêu cầu đến API
                 const response = await fetch(url, {
-                    method: "GET", // Phương thức GET
+                    method: "POST", // Phương thức POST
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(requestData)
                 });
 
                 // Kiểm tra kết quả
