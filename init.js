@@ -21,10 +21,11 @@
             }
 
             try {
-                // Xác định API dựa trên số lần click
-                const url = clickCount === 0 
-                    ? "http://localhost:5000/process" 
-                    : "http://localhost:5000/readall";
+                // Xác định cách gọi API dựa trên số lần click
+                const url = "http://localhost:5000/process";
+                const runtype = clickCount === 0 
+                    ? "summarize" 
+                    : "full";
 
                 // Dữ liệu gửi đi trong trường hợp POST
                 const requestData = { message: "Hello API" };
